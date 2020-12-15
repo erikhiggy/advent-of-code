@@ -1,13 +1,13 @@
 pub fn solution_pt_1() -> i64 {
     let entries = get_input();
-    let sum_of_two = get_sum_of_two_entries(2020, &entries);
+    let sum_of_two = get_sum_of_two_entries(2020, &entries).unwrap();
 
     return (sum_of_two.0 * sum_of_two.1) as i64;
 }
 
 pub fn solution_pt_2() -> i64 {
     let entries = get_input();
-    let sum_of_three = get_sum_of_three_entries(2020, &entries);
+    let sum_of_three = get_sum_of_three_entries(2020, &entries).unwrap();
 
     return (sum_of_three.0 * sum_of_three.1 * sum_of_three.2) as i64;
 }
