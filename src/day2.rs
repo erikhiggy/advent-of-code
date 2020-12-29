@@ -46,8 +46,6 @@ fn get_number_of_valid_passwords_part2(inputs: Vec<Vec<&str>>) -> i32 {
         let pos1_present = line[4].chars().nth(min - 1) == Some(character);
         let pos2_present = line[4].chars().nth(max - 1) == Some(character);
 
-        // println!("min: {}({}), max: {}({}), letter: {}({}), password: {}x ({}), pos1: {}, pos2 {}", min, line[0], max, line[1], character, line[2], char_count, line[4], pos1_present, pos2_present);
-
         if pos1_present && pos2_present {
             continue
         }
