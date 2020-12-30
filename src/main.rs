@@ -23,8 +23,8 @@ fn main() {
     println!("Day 3 Solution Part 2: {}", day3_solution_pt_2);
 
     let day4_solution_pt_1 = day4::get_solution_pt_1();
-    let day4_solution_pt_2 = day4::get_solution_pt_2();
+    // let day4_solution_pt_2 = day4::get_solution_pt_2();
 
     println!("Day 4 Solution Part 1: {}", day4_solution_pt_1);
-    println!("Day 4 Solution Part 2: {}", day4_solution_pt_2);
+    // println!("Day 4 Solution Part 2: {:?}", day4_solution_pt_2);
 }
