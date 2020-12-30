@@ -101,7 +101,6 @@ fn validate_passport_pt_2(pid_pattern: &Regex, ecl_pattern: &Regex, cm_pattern: 
 pub fn get_solution_pt_1() -> i32 {
     let parsed_input = parse_input(get_input());
     let mut valid_passports = 0;
-    println!("Parsed Input: {:?}", parsed_input);
     for passport in parsed_input.iter() {
         if validate_passport_pt_1(passport) {
             valid_passports += 1;
@@ -121,7 +120,6 @@ pub fn get_solution_pt_2() -> i32 {
     let pid_matcher: Regex = Regex::new(r"^[0-9]{9}$").unwrap();
     let ecl_matcher: Regex = Regex::new(r"^amb$|^blu$|^brn$|^gry$|^grn$|^hzl$|^oth$").unwrap();
     for passport in parsed_input.iter() {
-        println!("Passport: {:?}", passport);
         if validate_passport_pt_2(&pid_matcher, &ecl_matcher, &cm_matcher, &in_matcher, &num_matcher, &color_matcher, passport) {
             valid_passports += 1;
         }
