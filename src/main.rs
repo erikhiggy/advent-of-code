@@ -29,5 +29,5 @@ fn main() {
     // println!("Day 4 Solution Part 1: {}", day4_solution_pt_1);
     // println!("Day 4 Solution Part 2: {:?}", day4_solution_pt_2);
 
-    println!("Day 5 Input: {:?}", day5::get_input());
+    println!("Day 5 Solution Part 1: {:?}", day5::get_solution_pt_1());
 }
