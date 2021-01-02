@@ -1,5 +1,3 @@
-use core::num::flt2dec::decode;
-
 fn get_input() -> Vec<&'static str> {
     include_str!("./inputs/day5.txt").lines().collect()
 }
@@ -54,17 +52,25 @@ pub fn get_solution_pt_1() -> i32 {
     max
 }
 
-pub fn get_solution_part_2() -> i32 {
+pub fn get_solution_pt_2() -> i32 {
     let mut sid_vec: Vec<i32> = Vec::new();
     for line in get_input().iter() {
         let sid = get_sid(decode_seat_string(line));
         sid_vec.push(sid);
     }
 
+
     sid_vec.sort();
 
-    for sid in sid_vec.iter() {
-
+    let mut my_seat: i32 = 0;
+    for (index, sid) in sid_vec.iter().enumerate() {
+        // if the sid at index + 1 is 2 greater than the sid at index,
+        // return sid + 1
+        if sid + 2 == sid_vec[index + 1] {
+            my_seat = sid + 1;
+            break;
+        }
     }
-    10
+
+    my_seat
 }
