@@ -36,5 +36,7 @@ fn main() {
     println!("Day 5 Solution Part 1: {:?}", day5_solution_pt_1);
     println!("Day 5 Solution Part 2: {:?}", day5_solution_pt_2);
 
-    println!("Day 6 Input: {:?}", day6::get_input());
+    let day6_solution_pt_1 = day6::get_solution_pt_1();
+
+    println!("Day 6 Solution Part 1: {:?}", day6_solution_pt_1);
 }
