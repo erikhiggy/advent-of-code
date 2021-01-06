@@ -1,4 +1,4 @@
-use std::collections::HashSet;
+use std::collections::{HashSet, HashMap};
 
 fn get_input() -> Vec<&'static str> {
     include_str!("./inputs/day7.txt").lines().collect()
@@ -39,23 +39,29 @@ fn find_shiny_gold(input: Vec<&str>) -> usize {
 
 fn shiny_gold_pt_2(input: Vec<&str>) -> usize {
     let mut shiny_gold_bags: usize = 0;
-    let mut bags_vec: Vec<String> = Vec::new();
-    // push the initial bags into the list
-    bags_vec.push(String::from("shiny gold"));
+    let mut bags_map: HashMap<String, usize> = HashMap::new();
+    // push the initial bags into the map
+    bags_map.insert(String::from("shiny gold"), 1);
 
     // while there are till bags to go through
-    while !bags_vec.is_empty() {
+    while !bags_map.is_empty() {
         // save a copy of the bags vec for iteration purposes
-        let temp_vec = bags_vec.clone();
-        println!("Bags Vec: {:?}", bags_vec);
+        let temp_map = bags_map.clone();
+        println!("Bags Map: {:?}", bags_map);
         // clear the bags vec to prepare for the new bags
-        bags_vec.clear();
-        for bag in temp_vec.iter() {
+        bags_map.clear();
+        for (bag, _number) in temp_map.iter() {
             for line in input.iter() {
                 if line.starts_with(bag) {
-                    let new_bags: String = line[line.chars().find(|x| x.is_digit(10))..line.find("bag").unwrap() - 1].parse().unwrap();
-                    let mut new_bags_vec: Vec<String> = new_bags.chars().split(',');
-                    bags_vec = new_bags_vec;
+                    let new_bags: String = line[line.find("contain").unwrap() + 8..line.find('.').unwrap()].parse().unwrap();
+
+                    if new_bags == "no other bags" {
+                        break;
+                    }
+
+                    for new_bag in new_bags.split(",") {
+                        bags_map.insert(new_bag[new_bag.find(new_bag.split_whitespace().next().unwrap()).unwrap() + 2..].parse().unwrap(), new_bag.split_whitespace().next().unwrap().parse().unwrap());
+                    }
                 }
             }
         }
