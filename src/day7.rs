@@ -47,21 +47,26 @@ fn shiny_gold_pt_2(input: Vec<&str>) -> usize {
     while !bags_map.is_empty() {
         // save a copy of the bags vec for iteration purposes
         let temp_map = bags_map.clone();
-        println!("Bags Map: {:?}", bags_map);
         // clear the bags vec to prepare for the new bags
         bags_map.clear();
         for (bag, _number) in temp_map.iter() {
             for line in input.iter() {
+                // if we find the bag at the start, do some work then move to next bag
                 if line.starts_with(bag) {
-                    let new_bags: String = line[line.find("contain").unwrap() + 8..line.find('.').unwrap()].parse().unwrap();
+                    let child_bags: String = line[line.find("contain").unwrap() + 8..line.find('.').unwrap()].parse().unwrap();
 
-                    if new_bags == "no other bags" {
+                    // if there are no other bags, dont push the bag in and move on to next bag
+                    // we are at a leaf
+                    if child_bags == "no other bags" {
+                        // println!("Leaves: {:?}", temp_map);
                         break;
                     }
 
-                    for new_bag in new_bags.split(",") {
-                        bags_map.insert(new_bag[new_bag.find(new_bag.split_whitespace().next().unwrap()).unwrap() + 2..].parse().unwrap(), new_bag.split_whitespace().next().unwrap().parse().unwrap());
+                    for child_bag in child_bags.split(",") {
+                        bags_map.insert(child_bag[child_bag.find(child_bag.split_whitespace().next().unwrap()).unwrap() + 2..].parse().unwrap(), child_bag.split_whitespace().next().unwrap().parse().unwrap());
                     }
+                    println!("Bags Map: {:?}", bags_map);
+                    break;
                 }
             }
         }
