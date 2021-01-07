@@ -47,4 +47,5 @@ fn main() {
        let day7_solution_pt_2 = day7::get_solution_pt_2();
     //
     // println!("Day 7 Solution Part 1: {:?}", day7_solution_pt_1);
+       println!("Shiny Gold Bags: {:?}", day7_solution_pt_2);
 }

@@ -39,37 +39,51 @@ fn find_shiny_gold(input: Vec<&str>) -> usize {
 
 fn shiny_gold_pt_2(input: Vec<&str>) -> usize {
     let mut shiny_gold_bags: usize = 0;
-    let mut bags_map: HashMap<String, usize> = HashMap::new();
+    let mut bags_map: Vec<String> = Vec::new();
     // push the initial bags into the map
-    bags_map.insert(String::from("shiny gold"), 1);
+    bags_map.push(String::from("shiny gold"));
 
     // while there are till bags to go through
-    while !bags_map.is_empty() {
+    let mut should_loop: bool = true;
+    let mut i = 0;
+    while i < 6 {
         // save a copy of the bags vec for iteration purposes
         let temp_map = bags_map.clone();
         // clear the bags vec to prepare for the new bags
         bags_map.clear();
-        for (bag, _number) in temp_map.iter() {
+        for bag in temp_map.iter() {
             for line in input.iter() {
                 // if we find the bag at the start, do some work then move to next bag
                 if line.starts_with(bag) {
                     let child_bags: String = line[line.find("contain").unwrap() + 8..line.find('.').unwrap()].parse().unwrap();
 
-                    // if there are no other bags, dont push the bag in and move on to next bag
+                    // if there are no other bags, don't push the bag in and move on to next bag
                     // we are at a leaf
                     if child_bags == "no other bags" {
-                        // println!("Leaves: {:?}", temp_map);
                         break;
                     }
 
                     for child_bag in child_bags.split(",") {
-                        bags_map.insert(child_bag[child_bag.find(child_bag.split_whitespace().next().unwrap()).unwrap() + 2..].parse().unwrap(), child_bag.split_whitespace().next().unwrap().parse().unwrap());
+                        let child_bag_value = child_bag.split_whitespace().next().unwrap().parse().unwrap();
+                        for _i in 0..child_bag_value {
+                            bags_map.push(child_bag[child_bag
+                                .find(child_bag
+                                .split_whitespace()
+                                .next()
+                                .unwrap())
+                                .unwrap() + 2..]
+                                .parse()
+                                .unwrap());
+                        }
                     }
-                    println!("Bags Map: {:?}", bags_map);
+                    println!("Shiny Gold Bags: {:?}", shiny_gold_bags);
+                    shiny_gold_bags += bags_map.len();
+                    println!("Bags: {:?}", bags_map);
                     break;
                 }
             }
         }
+        i += 1;
     }
 
     shiny_gold_bags
