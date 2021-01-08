@@ -5,6 +5,7 @@ mod day4;
 mod day5;
 mod day6;
 mod day7;
+mod day8;
 
 fn main() {
     // let day1_solution_pt_1 = day1::solution_pt_1();
@@ -44,8 +45,12 @@ fn main() {
     // println!("Day 6 Solution Part 2: {:?}", day6_solution_pt_2);
     //
     // let day7_solution_pt_1 = day7::get_solution_pt_1();
-       let day7_solution_pt_2 = day7::get_solution_pt_2();
+    // let day7_solution_pt_2 = day7::get_solution_pt_2();
     //
     // println!("Day 7 Solution Part 1: {:?}", day7_solution_pt_1);
-       println!("Shiny Gold Bags: {:?}", day7_solution_pt_2);
+    // println!("Day 7 Solution Part 2: {:?}", day7_solution_pt_2);
+
+    let day8_solution_pt_1 = day8::get_solution_pt_1();
+
+    println!("Day 8 Solution Part 1: {:?}", day8_solution_pt_1);
 }
