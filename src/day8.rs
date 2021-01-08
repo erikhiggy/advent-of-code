@@ -7,13 +7,11 @@ fn tokenize(instruction: &str) -> (&str, &str) {
 }
 
 fn accumulate(arg: &str) -> i32 {
-    let mut value_to_number: i32 = 0;
-    if arg.chars().next() == Some('-') {
-        value_to_number = -arg[1..].parse::<i32>().unwrap();
+    return if arg.chars().next() == Some('-') {
+        -arg[1..].parse::<i32>().unwrap()
     } else {
-        value_to_number = arg[1..].parse::<i32>().unwrap();
+        arg[1..].parse::<i32>().unwrap()
     }
-    value_to_number
 }
 
 #[cfg(test)]
@@ -24,6 +22,14 @@ fn accumulate_positive_test() {
 #[test]
 fn accumulate_negative_test() {
     assert_eq!(accumulate("-7"), -7)
+}
+#[test]
+fn tokenize_positive_test() {
+    assert_eq!(tokenize("acc +3"), ("acc", "+3"))
+}
+#[test]
+fn tokenize_negative_test() {
+    assert_eq!(tokenize("acc -3"), ("acc", "-3"))
 }
 
 pub fn get_solution_pt_1() -> i32 {
