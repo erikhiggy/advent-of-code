@@ -1,4 +1,5 @@
 use std::borrow::Borrow;
+use std::process::id;
 
 fn get_input() -> Vec<&'static str> {
     include_str!("./inputs/day8.txt").lines().collect()
@@ -53,45 +54,50 @@ fn compute_program(program: Vec<&str>) -> i32 {
     acc_value
 }
 
-fn compute_program_pt_2(mut program: Vec<&str>) -> i32 {
-    let mut visited_array: Vec<bool> = vec![false; program.len()];
+fn compute_program_pt_2(program: Vec<&str>) -> i32 {
+    let mut visited_array: Vec<bool>;
     let mut acc_value: i32 = 0;
     let mut should_end: bool = false;
     let mut pc: usize = 0;
 
-    let mut cloned_prog = program.clone();
+    let mut terminated_successfully = false;
 
     for (idx, instr) in program.iter().enumerate() {
+        if terminated_successfully {
+            break;
+        }
         // for each jmp or nop, run the program swapping that jmp to a nop
         // or vice versa until the program successfully terminates
-        let mut op: &str = tokenize(instr).0;
-        let arg: &str = tokenize(instr).1;
+        let mut fake_op: &str = tokenize(instr).0;
+        let fake_arg: &str = tokenize(instr).1;
 
         visited_array = vec![false; program.len()];
         acc_value = 0;
         should_end = false;
         pc = 0;
 
-        // successful terminate flag
-        let mut terminated_successfully = false;
+        let mut cloned_program = program.clone();
 
-        println!("instruction: {:?}", op);
+        let mut formatted_string: String;
 
-        match op {
-            "nop" => cloned_prog[idx] = format!("{}{}", op, arg),
+        match fake_op {
+            "nop" => {
+                formatted_string = format!("jmp {}", fake_arg);
+                cloned_program[idx] = &*formatted_string;
+            },
             // we want to ignore acc ops
-            "acc" => op = "acc",
-            "jmp" => cloned_prog[idx] = format!("nop {}", arg).parse().unwrap(),
-            _ => println!("Op {:?} is not valid!", op)
+            "acc" => fake_op = "acc",
+            "jmp" => {
+                formatted_string = format!("nop {}", fake_arg);
+                cloned_program[idx] = &*formatted_string;
+            },
+            _ => println!("Op {:?} is not valid!", fake_op)
         }
 
-        // println!("Converted instructions: {:?}", op);
-        // println!("PC: {:?}", pc);
-        // println!("Visited Array: {:?}", visited_array);
-
         while !should_end {
-            let mut op: &str = tokenize(cloned_prog[pc]).0;
-            let arg: &str = tokenize(cloned_prog[pc]).1;
+            let mut op: &str = tokenize(cloned_program[pc]).0;
+            let arg: &str = tokenize(cloned_program[pc]).1;
+
             match op {
                 "nop" => {
                     // noop, do nothing and increment the pc
@@ -109,10 +115,11 @@ fn compute_program_pt_2(mut program: Vec<&str>) -> i32 {
                     visited_array[pc] = true;
                     pc = pc.wrapping_add(accumulate(arg) as usize);
                 },
-                _ => {
-                    println!("Program ended successfully!");
-                    terminated_successfully = true;
-                }
+                _ => ()
+            }
+
+            if pc == visited_array.len() {
+                terminated_successfully = true;
             }
 
             if terminated_successfully == true {
