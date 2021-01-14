@@ -1,6 +1,3 @@
-use std::borrow::Borrow;
-use std::process::id;
-
 fn get_input() -> Vec<&'static str> {
     include_str!("./inputs/day8.txt").lines().collect()
 }
