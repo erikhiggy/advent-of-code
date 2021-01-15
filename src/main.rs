@@ -55,7 +55,9 @@ fn main() {
     // println!("Day 8 Solution Part 1: {:?}", day8_solution_pt_1);
     // println!("Day 8 Solution Part 2: {:?}", day8_solution_pt_2);
 
-    let day9_solution_pt_1 = day9::get_solution_pt_1();
+    // let day9_solution_pt_1 = day9::get_solution_pt_1();
+    let day9_solution_pt_2 = day9::get_solution_pt_2();
 
-    println!("Day 9 Solution Part 1: {:?}", day9_solution_pt_1);
+    // println!("Day 9 Solution Part 1: {:?}", day9_solution_pt_1);
+    println!("Day 9 Solution Part 2: {:?}", day9_solution_pt_2);
 }

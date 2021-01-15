@@ -37,6 +37,40 @@ fn sum_of_two(preamble: &VecDeque<i64>, target: i64) -> bool {
     is_sum
 }
 
+fn contiguous_sum(list: &Vec<i64>, target: i64) -> i64 {
+    let mut low_num: i64 = 0;
+    let mut high_num: i64 = 0;
+    let mut sum: i64 = 0;
+    let mut j: usize = 0;
+
+    for i in 0..list.len() {
+        j = i;
+        low_num = list[i];
+        high_num = list[i];
+        sum = 0;
+
+        while sum < target {
+            // check for a lower number
+            if list[j] < low_num {
+                low_num = list[j]
+            }
+
+            // check for higher number
+            if list[j] > high_num {
+                high_num = list[j]
+            }
+
+            sum += list[j];
+            j += 1;
+        }
+
+        if sum == target {
+            break;
+        }
+    }
+    low_num + high_num
+}
+
 pub fn get_solution_pt_1() -> i64 {
     let input = get_input();
     let preamble_len: usize = 25;
@@ -62,6 +96,12 @@ pub fn get_solution_pt_1() -> i64 {
         }
     }
     no_sum_value
+}
+
+pub fn get_solution_pt_2() -> i64 {
+    let input = get_input();
+    let weakness = contiguous_sum(&input, 133015568);
+    weakness
 }
 
 #[cfg(test)]
