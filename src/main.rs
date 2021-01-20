@@ -7,6 +7,7 @@ mod day6;
 mod day7;
 mod day8;
 mod day9;
+mod day10;
 
 fn main() {
     // let day1_solution_pt_1 = day1::solution_pt_1();
@@ -56,8 +57,12 @@ fn main() {
     // println!("Day 8 Solution Part 2: {:?}", day8_solution_pt_2);
 
     // let day9_solution_pt_1 = day9::get_solution_pt_1();
-    let day9_solution_pt_2 = day9::get_solution_pt_2();
+    // let day9_solution_pt_2 = day9::get_solution_pt_2();
 
     // println!("Day 9 Solution Part 1: {:?}", day9_solution_pt_1);
-    println!("Day 9 Solution Part 2: {:?}", day9_solution_pt_2);
+    // println!("Day 9 Solution Part 2: {:?}", day9_solution_pt_2);
+
+    let day10_solution_pt_1 = day10::get_solution_pt_1();
+
+    println!("Day 10 Solution Part 1: {:?}", day10_solution_pt_1);
 }
